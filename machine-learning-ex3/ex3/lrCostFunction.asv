@@ -41,10 +41,7 @@ sig  = sigmoid (X * theta);
 
 theta0 = [ 0; theta(2: end, :)];
 p = lambda * (theta0' * theta)/(2*m);
-J = (( -y)' * log(sig) - (1-y)' * log(1-sig))/m + p;
-
-
-grad = (X'*(sig -y)+ lambda*theta0) /m
+J = (( -y)' * log(sig) - (1-y)' * log(1)
 
 
 
