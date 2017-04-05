@@ -63,21 +63,27 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+% Feedforward
+a1 = [ones(m, 1) X];
+z2 = a1 * Theta1'; a2 = [ones(m, 1) sigmoid(z2)];
+z3 = a2 * Theta2'; a3 = sigmoid(z3);
 
+% Label matrix
+Y = bsxfun(@eq, y, 1:num_labels);
 
+% Cost func
+sumn = @(M) sum(M(:));
+J = sumn(-Y.*log(a3)-(1-Y).*log(1-a3)) / m + ...
+    lambda / (2*m) * (sumn(Theta1(:,2:end).^2) + sumn(Theta2(:,2:end).^2));
 
+% Backprop
+delta3 = a3 - Y;
+Theta2_grad = delta3' * a2 / m + ...
+    lambda / m * [zeros(num_labels,1) Theta2(:,2:end)];
 
-
-
-
-
-
-
-
-
-
-
-
+delta2 = delta3*Theta2 .* [ones(m, 1) sigmoidGradient(z2)];
+Theta1_grad = delta2(:, 2:end)' * a1 / m + ...
+    lambda / m * [zeros(hidden_layer_size,1) Theta1(:,2:end)];
 
 
 % -------------------------------------------------------------
