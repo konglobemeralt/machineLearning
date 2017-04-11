@@ -27,13 +27,13 @@ m = size(X,1);
 
 for i=1:m
 
-    poly = zeros(p, 1);
+    poly_feature = zeros(p, 1);
 
     for j=1:p
-        poly(j) =  X(i).^j;
+        poly_feature(j) =  X(i).^j;
     end
 
-    X_poly(i, :) = poly;
+    X_poly(i, :) = poly_feature;
 end
 
 
