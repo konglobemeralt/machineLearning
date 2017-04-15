@@ -22,7 +22,17 @@ idx = zeros(size(X,1), 1);
 %
 
 
-
+for i = 1:size(X, 1)
+  mindDiff = inf;
+  for k = 1:K
+    difference = X(i, :)'-centroids(k, :)';
+    d = difference'*difference;
+    if (d < mindDiff)
+      idx(i) = k;
+      mindDiff = d;
+    end
+  end
+end
 
 
 
